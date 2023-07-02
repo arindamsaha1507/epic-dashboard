@@ -1,2 +1,3 @@
-# epic-dashboard
-The public dashboard component of epic
+# TerraView
+
+Dashboard for location visualisation based on OpenStreetMap for FACS
