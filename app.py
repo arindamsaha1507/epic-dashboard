@@ -3,15 +3,17 @@
 # pylint: disable=import-error
 
 import streamlit as st
-import pandas as pd
 import plotly.express as px
 
 
 import data_parser as dp
+import plotter as pl
 
 
 def main() -> None:
     """The main function of the app."""
+
+    st.set_page_config(layout="wide")
 
     st.title("Map Application")
 
@@ -42,18 +44,30 @@ def main() -> None:
 
         st.dataframe(summary, use_container_width=True)
 
-        fig = px.pie(summary, values="Area", names="Type")
-        st.plotly_chart(fig)
+        figures = pl.create_summary_plots(summary)
+        titles = list(figures.keys())
+        plots = list(figures.values())
 
-        fig = px.pie(summary, values="Mean Area", names="Type")
-        st.plotly_chart(fig)
+        with st.container():
+            st.markdown("---")
+            st.markdown("## Summary Plots")
+            st.markdown("---")
+            columns = st.columns(len(figures))
+            for index, column in enumerate(columns):
+                with column:
+                    st.markdown(f"## {titles[index]}")
+                    st.plotly_chart(plots[index])
 
-        fig = px.scatter_mapbox(
-            data, lat="Latitude", lon="Longitude", color="Type", zoom=10
-        )
-        fig.update_layout(mapbox_style="open-street-map")
-        fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
-        st.plotly_chart(fig)
+        with st.container():
+            st.markdown("---")
+            st.markdown("## Map")
+            st.markdown("---")
+            fig = px.scatter_mapbox(
+                data, lat="Latitude", lon="Longitude", color="Type", zoom=10
+            )
+            fig.update_layout(mapbox_style="open-street-map")
+            fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
+            st.plotly_chart(fig, use_container_width=True)
 
 
 if __name__ == "__main__":
