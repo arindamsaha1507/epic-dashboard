@@ -1,0 +1,4 @@
+FabSim3:
+  location: "/home/arindam/FabSim3/"
+  input_path: "plugins/FabCovid19/config_files/"
+  output_path: "results/"

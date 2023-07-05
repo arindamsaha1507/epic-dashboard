@@ -5,6 +5,7 @@ import streamlit as st
 
 import data_parser as dp
 import plotter as pl
+import path_handler as ph
 
 
 def main() -> None:
@@ -28,7 +29,7 @@ def main() -> None:
         """
     )
 
-    data_dir = "data/"
+    data_dir = ph.get_input_dir()
 
     locations = dp.get_location_list(data_dir)
 
