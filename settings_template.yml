@@ -1,0 +1,4 @@
+FabSim3:
+  location: "<absolute path to FabSim3 directory>"
+  input_path: "<path to config_files directory in FabCovid19 plugin relative to the FabSim3 directory>"
+  output_path: "<path to results directory relative to the FabSim3 directory>"
