@@ -1,10 +1,7 @@
 """Creates a map application using Streamlit."""
 
-# pylint: disable=import-error
 
 import streamlit as st
-import plotly.express as px
-
 
 import data_parser as dp
 import plotter as pl
@@ -62,11 +59,8 @@ def main() -> None:
             st.markdown("---")
             st.markdown("## Map")
             st.markdown("---")
-            fig = px.scatter_mapbox(
-                data, lat="Latitude", lon="Longitude", color="Type", zoom=10
-            )
-            fig.update_layout(mapbox_style="open-street-map")
-            fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
+
+            fig = pl.create_map(data)
             st.plotly_chart(fig, use_container_width=True)
 
 
